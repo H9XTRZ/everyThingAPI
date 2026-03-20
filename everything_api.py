@@ -19,6 +19,56 @@ def imac_unlock_status():
         return True
     else:
         return False
+    
+
+
+garage_status = ""
+car_status = "False"
+open_all = False
+last_garage_stat = ""
+last_car_status = ""
+
+@app.get("/garage-and-car-status")
+def get_garage_status():
+    global garage_status, car_status
+    if garage_status != last_garage_stat or car_status != last_car_status:
+        last_car_status = car_status
+        last_garage_stat = last_garage_stat
+        return {"car": car_status, "garage": garage_status}
+    else:
+        return {"status": None}
+
+
+@app.get("/open-garage")
+def open_garage():
+    global garage_status
+    garage_status = "OPEN"
+    return {"status": "opening garage"}
+
+@app.get("/close-garage")
+def close_garage():
+    global garage_status
+    garage_status = "CLOSE"
+    return {"status": "closing garage"}
+
+@app.get("/start-car")
+def start_car():
+    global car_status
+    car_status = "START"
+    return {"status": "starting car"}
+
+@app.get("/stop-car")
+def start_car():
+    global car_status
+    car_status = "STOP"
+    return {"status": "stopping car"}
+
+@app.get("/open-both")
+def both():
+    global garage_status, car_status
+    garage_status = "OPEN"
+    car_status = "START"
+    return {"status": "opening both"}
 
 
 routes = []
