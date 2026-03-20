@@ -22,52 +22,58 @@ def imac_unlock_status():
     
 
 
-garage_status = ""
-car_status = "False"
+garage_status = False
+car_status = False
 open_all = False
-last_garage_stat = ""
-last_car_status = ""
+g_stat = False  # tempary varibles
+c_stat = False  # tempary varibles
 
 @app.get("/garage-and-car-status")
 def get_garage_status():
-    global garage_status, car_status, last_car_status, last_garage_stat
-    if garage_status != last_garage_stat or car_status != last_car_status:
-        last_car_status = car_status
-        last_garage_stat = last_garage_stat
-        return {"car": car_status, "garage": garage_status}
+    global garage_status, car_status
+    if garage_status:
+        g_stat = True
+        garage_status = False
     else:
-        return {"status": None}
+        g_stat = False
+    if car_status:
+        c_stat = True
+        car_status = False
+    else:
+        c_stat = False
+    return {"car": c_stat, "garage": g_stat}
+
 
 
 @app.get("/open-garage")
 def open_garage():
     global garage_status
-    garage_status = "OPEN"
+    garage_status = True
     return {"status": "opening garage"}
 
 @app.get("/close-garage")
 def close_garage():
     global garage_status
-    garage_status = "CLOSE"
+    garage_status = True
     return {"status": "closing garage"}
 
 @app.get("/start-car")
 def start_car():
     global car_status
-    car_status = "START"
+    car_status = True
     return {"status": "starting car"}
 
 @app.get("/stop-car")
 def start_car():
     global car_status
-    car_status = "STOP"
+    car_status = True
     return {"status": "stopping car"}
 
 @app.get("/open-both")
 def both():
     global garage_status, car_status
-    garage_status = "OPEN"
-    car_status = "START"
+    garage_status = True
+    car_status = True
     return {"status": "opening both"}
 
 
