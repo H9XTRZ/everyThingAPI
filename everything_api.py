@@ -30,7 +30,7 @@ last_car_status = ""
 
 @app.get("/garage-and-car-status")
 def get_garage_status():
-    global garage_status, car_status
+    global garage_status, car_status, last_car_status, last_garage_stat
     if garage_status != last_garage_stat or car_status != last_car_status:
         last_car_status = car_status
         last_garage_stat = last_garage_stat
