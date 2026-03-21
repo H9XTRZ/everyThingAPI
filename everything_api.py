@@ -76,6 +76,13 @@ def both():
     car_status = True
     return {"status": "opening both"}
 
+@app.get("/close-both")
+def bothOff():
+    global garage_status, car_status
+    garage_status = True
+    car_status = True
+    return {"status": "closing both"}
+
 
 routes = []
 for route in app.routes:
