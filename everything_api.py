@@ -16,9 +16,9 @@ def imac_unlock_status():
     global imac_unlock_status
     if imac_unlock_status:
         imac_unlock_status = False
-        return True
+        return {"status": True}
     else:
-        return False
+        return {"status": False}
     
 
 
