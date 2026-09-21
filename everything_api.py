@@ -30,7 +30,7 @@ open_all = False
 g_stat = False  # tempary varibles
 c_stat = False  # tempary varibles
 
-
+API_KEY = "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"
 SYSTEM_PROMPT = (
     "Look at the newest screenshot. If it shows exactly one clear multiple-choice "
     "question with four readable choices, solve it and return the correct choice's "
@@ -53,7 +53,7 @@ ANSWER_FORMAT = {
         "option": {"type": "integer", "enum": [0, 1, 2, 3, 4]}},
         "required": ["option"], "additionalProperties": False},
 }
-def chat(image, history, API_KEY):
+def chat(image, history):
     message = {"role": "user", "content": [
         {"type": "input_text", "text": "Choose the correct option position for this screenshot."},
         {"type": "input_image", "image_url": image, "detail": "high"},
@@ -75,8 +75,8 @@ def chat(image, history, API_KEY):
 
 
 @app.get("/chat")
-def chatConElGPT(image, history, key):
-    count = chat(image, history, key)
+def chatConElGPT(image, history):
+    count = chat(image, history)
     return {"response": count}
 
 @app.get("/garage-and-car-status")
