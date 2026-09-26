@@ -1,4 +1,4 @@
-# Direct runtime dependencies for everything_api.py.
+
 fastapi==0.115.12
 openai==1.78.1
 uvicorn==0.34.2
