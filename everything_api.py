@@ -75,7 +75,7 @@ def chat(image, history):
 
 
 @app.get("/chat")
-def chatConElGPT(image, history):
+def chatConElGPT(image: str, history: list):
     count = chat(image, history)
     return {"response": count}
 
